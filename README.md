@@ -1,1 +1,1 @@
-# dooms
+This project uses logistic regression in R to predict fraudulent credit card transactions from an imbalanced dataset (99.8% legitimate, 0.2% fraud). Used precision-recall trade-offs (confusion matrix) and AUC-ROC (0.98 score),AUC-ROC: 0.98, indicating excellent model performance.
