@@ -45,4 +45,3 @@ test$pred_class_optim <- ifelse(test$pred_prob > best_thresh, "Fraud", "Legit")
 test %>% 
   filter(pred_prob > 0.07) %>% 
   summarise(Fraud_Capture_Rate = mean(Class == "Fraud"))
-
