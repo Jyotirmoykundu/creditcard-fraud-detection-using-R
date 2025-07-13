@@ -3,15 +3,16 @@ library(tidyverse)
 library(caret)
 fraud_data <- read_csv("creditcard.csv") %>% 
   mutate(Class = factor(Class, levels = c(0, 1), labels = c("Legit", "Fraud")))
-set.seed(123)
-train_index <- createDataPartition(fraud_data$Class, p = 0.8, list = FALSE)
-train <- fraud_data[train_index, ]
-test <- fraud_data[-train_index, ]
 #Visualizing the distribution of transaction amounts for fraud vs. legitimate transactions.
 ggplot(fraud_data, aes(x = Amount, fill = Class)) +
   geom_histogram(bins = 30, alpha = 0.7) +
   scale_x_log10() +
   labs(title = "Transaction Amount by Class")
+#split data
+set.seed(123)
+train_index <- createDataPartition(fraud_data$Class, p = 0.8, list = FALSE)
+train <- fraud_data[train_index, ]
+test <- fraud_data[-train_index, ]
 # Train model
 model <- glm(Class ~ V1 + V2 + V3 + Amount, 
              data = train, 
@@ -36,7 +37,7 @@ conf_matrix <- confusionMatrix(
   positive = "Fraud"
 )
 print(conf_matrix)
-
+#roc curve 
 library(pROC)
 roc_curve <- roc(test$Class, test$pred_prob, levels = c("Legit", "Fraud"))
 plot(roc_curve, print.auc = TRUE)
