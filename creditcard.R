@@ -1,4 +1,3 @@
-
 library(tidyverse)
 library(caret)
 fraud_data <- read_csv("creditcard.csv") %>% 
