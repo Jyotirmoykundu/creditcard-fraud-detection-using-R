@@ -1,4 +1,4 @@
-Tools: R, ggplot2, caret, logistic regression, ROC, AUC
+Tools: R, ggplot2, caret, logistic regression, ROC, AUC.
 Loaded and cleaned transaction data, converting the target variable (Class) into a factor (Legit/Fraud) and applied
 exploratory data analysis to visualize the distribution of transaction amounts for fraud vs. legitimate transactions.
 Split data into 80% training and 20% test sets stratified by Class and assigned higher weight (100x) to fraud cases to handle
