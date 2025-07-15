@@ -1,5 +1,6 @@
 library(tidyverse)
 library(caret)
+library(ggplot2)
 fraud_data <- read_csv("creditcard.csv") %>% 
   mutate(Class = factor(Class, levels = c(0, 1), labels = c("Legit", "Fraud")))
 #Visualizing the distribution of transaction amounts for fraud vs. legitimate transactions.
@@ -17,12 +18,10 @@ model <- glm(Class ~ V1 + V2 + V3 + Amount,
              data = train, 
              family = "binomial",
              weights = ifelse(train$Class == "Fraud", 100, 1))
-
 # Predictions
 test$pred_prob <- predict(model, test, type = "response")
 test$pred_class <- factor(ifelse(test$pred_prob > 0.5, "Fraud", "Legit"), 
                           levels = c("Legit", "Fraud"))
-
 # Ensuring Class is a factor with matching levels
 test$Class <- factor(test$Class, levels = c("Legit", "Fraud"))
 
@@ -45,3 +44,4 @@ test$pred_class_optim <- ifelse(test$pred_prob > best_thresh, "Fraud", "Legit")
 test %>% 
   filter(pred_prob > 0.07) %>% 
   summarise(Fraud_Capture_Rate = mean(Class == "Fraud"))
+cat("Logistic Regression AUC:", auc(roc_curve), "\n")
