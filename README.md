@@ -8,4 +8,8 @@ coefficients.
 Used precision-recall trade-offs (confusion matrix) and AUC-ROC (0.929 score),AUC-ROC: 0.929, indicating excellent model performance.
 Optimized the threshold to capture 92% of frauds while keeping precision at 35%. 
 Visualized transaction patterns and prediction performance using advanced ggplot2 and ROC plots.
-threshold tuning can be applied according to the business needs
+threshold tuning can be applied according to the business needs.
+applied random forest method for comparing and 
+both the logit and rf model perfomes excellently very well with rf model having AUC(0.957) slighlty better than logit model AUC(0.951).
+we pick Random Forest if we need the highest possible detection rate (even slight improvements matter).
+we choose logistic model if we need to explain decisions.
